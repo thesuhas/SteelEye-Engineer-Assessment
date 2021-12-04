@@ -5,7 +5,7 @@ import os
 
 def parse(path):
     '''
-    Takes in the path to a XML file.
+    Parameters: Path to XML File
 
     Writes the data in the following tags to a csv file: 
     FinInstrmGnlAttrbts.Id, 
@@ -14,6 +14,8 @@ def parse(path):
     FinInstrmGnlAttrbts.CmmdtyDerivind,
     FinInstrmGnlAttrbts.NtnlCcy,
     Issr
+
+    Returns: None
     '''
 
     # Getting xml tree
