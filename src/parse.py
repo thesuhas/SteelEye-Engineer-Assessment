@@ -3,7 +3,7 @@ import xml.etree.ElementTree as Tree
 import os
 
 
-def parse(path):
+def parse(path: str) -> None:
     '''
     Parameters: Path to XML File
 
