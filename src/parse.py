@@ -4,6 +4,18 @@ import os
 
 
 def parse(path):
+    '''
+    Takes in the path to a XML file.
+
+    Writes the data in the following tags to a csv file: 
+    FinInstrmGnlAttrbts.Id, 
+    FinInstrmGnlAttrbts.FullNm,
+    FinInstrmGnlAttrbts.ClssfctnTp,
+    FinInstrmGnlAttrbts.CmmdtyDerivind,
+    FinInstrmGnlAttrbts.NtnlCcy,
+    Issr
+    '''
+
     # Getting xml tree
     tree = Tree.parse(path)
     # Get the root of tree
