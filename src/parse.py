@@ -5,20 +5,19 @@ from io import BytesIO
 from urllib.request import urlopen
 from zipfile import ZipFile
 
+
 class Parse:
     '''
     The Parse Object has the following parameters:
 
-    :param path: The path to save the downloaded XML file and also the resulting csv.
+    :param path: Path to save XML and resultant csv.
     :param url: The url to download the zip file and extract the URL from.
 
     Has two methods:
 
-    :method download: Runs as soon as an object is created. Downloads, extracts and stores the required XML file.
+    :method download: Runs on init. Downloads zip file, extracts XML to path.
     :method parse: Parses the XML file to the required CSV.
     '''
-
-
     def __init__(self, path=None, url=None) -> None:
         self.path = path
         self.url = url
@@ -33,8 +32,8 @@ class Parse:
         '''
         Uses the path property of the class to get the required path.
 
-        Writes the data in the following tags to a csv file: 
-        FinInstrmGnlAttrbts.Id,\n 
+        Writes the data in the following tags to a csv file:
+        FinInstrmGnlAttrbts.Id,\n
         FinInstrmGnlAttrbts.FullNm,\n
         FinInstrmGnlAttrbts.ClssfctnTp,\n
         FinInstrmGnlAttrbts.CmmdtyDerivind,\n
@@ -48,8 +47,6 @@ class Parse:
             for f in filenames:
                 if ".xml" in f:
                     filepath = os.path.join(self.path, f)
-        
-
         # Getting xml tree
         tree = Tree.parse(filepath)
         # Get the root of tree
@@ -75,20 +72,20 @@ class Parse:
                     # If required child has been found
                     if pattern in child.tag:
                         # Get the required grand-children
-                        for c in child:             
+                        for c in child:
                             for k in range(len(children)):
                                 # If grandchildren found, update entry
                                 if children[k] in c.tag:
                                     entry[k] = c.text
                     # If Issr found
-                    if tag in child.tag:                    
+                    if tag in child.tag:
                         entry[5] = child.text
                 # Add to list of rows
                 rows.append(entry)
         # Create Dataframe
         df = pd.DataFrame(data=rows, columns=cols)
         # Save to csv
-        df.to_csv('../ans.csv', index=False)    
+        df.to_csv(os.path.join(self.path, 'ans.csv'), index=False)
 
 
 if __name__ == '__main__':
