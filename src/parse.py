@@ -6,30 +6,41 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 class Parse:
-    
+    '''
+    The Parse Object has the following parameters:
+
+    :param path: The path to save the downloaded XML file and also the resulting csv.
+    :param url: The url to download the zip file and extract the URL from.
+
+    Has two methods:
+
+    :method download: Runs as soon as an object is created. Downloads, extracts and stores the required XML file.
+    :method parse: Parses the XML file to the required CSV.
+    '''
+
+
     def __init__(self, path=None, url=None) -> None:
         self.path = path
         self.url = url
         self.download()
 
     def download(self):
-        
         with urlopen(self.url) as response:
             with ZipFile(BytesIO(response.read())) as z:
                 z.extractall(self.path)
 
     def parse(self) -> None:
         '''
-        Parameters: Path to XML File
+        Uses the path property of the class to get the required path.
 
         Writes the data in the following tags to a csv file: 
-        FinInstrmGnlAttrbts.Id, 
-        FinInstrmGnlAttrbts.FullNm,
-        FinInstrmGnlAttrbts.ClssfctnTp,
-        FinInstrmGnlAttrbts.CmmdtyDerivind,
-        FinInstrmGnlAttrbts.NtnlCcy,
-        Issr
-
+        FinInstrmGnlAttrbts.Id,\n 
+        FinInstrmGnlAttrbts.FullNm,\n
+        FinInstrmGnlAttrbts.ClssfctnTp,\n
+        FinInstrmGnlAttrbts.CmmdtyDerivind,\n
+        FinInstrmGnlAttrbts.NtnlCcy,\n
+        Issr\n
+        \n
         Returns: None
         '''
         filepath = None
