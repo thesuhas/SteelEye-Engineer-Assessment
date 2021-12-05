@@ -19,6 +19,14 @@ class Parse:
     :method parse: Parses the XML file to the required CSV.
     '''
     def __init__(self, path=None, url=None) -> None:
+        '''
+        Downloads the XML Zip, extracts the XML file and saves it at the mentioned path.
+        
+        Parameters:
+        
+        :param url: URL to download Zip File from
+        :param path: Path to save the extracted XML at
+        '''
         self.path = path
         self.url = url
         self.download()
